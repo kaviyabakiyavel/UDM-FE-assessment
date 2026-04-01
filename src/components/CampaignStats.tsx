@@ -54,6 +54,7 @@ export function CampaignStats({ campaigns }: CampaignStatsProps) {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
       <div className="p-4 rounded-lg bg-white dark:bg-gray-800 shadow">
         <p className="text-sm text-gray-500 dark:text-gray-400">
           Total Campaigns
@@ -65,7 +66,9 @@ export function CampaignStats({ campaigns }: CampaignStatsProps) {
         <p className="text-sm text-gray-500 dark:text-gray-400">
           Total Spend
         </p>
-        <p className="text-2xl font-bold">{currency.format(totalSpend)}</p>
+        <p className="text-2xl font-bold">
+          {currency.format(totalSpend)}
+        </p>
       </div>
 
       <div className="p-4 rounded-lg bg-white dark:bg-gray-800 shadow">
@@ -81,7 +84,9 @@ export function CampaignStats({ campaigns }: CampaignStatsProps) {
         <p className="text-sm text-gray-500 dark:text-gray-400">
           Conversions
         </p>
-        <p className="text-2xl font-bold">{totalConversions}</p>
+        <p className="text-2xl font-bold">
+          {totalConversions === 0 ? "0 conversions" : totalConversions}
+        </p>
       </div>
 
     </div>

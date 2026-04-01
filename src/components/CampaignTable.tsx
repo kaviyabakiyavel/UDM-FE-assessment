@@ -66,20 +66,34 @@ export function CampaignTable({ campaigns }: CampaignTableProps) {
     currency: "USD",
   });
 
+  // Sort campaigns based on current field and order
   const sortedCampaigns = [...campaigns].sort((a, b) => {
     let result = 0;
 
-    if(field === "name") result = a.name.localeCompare(b.name);
-    if(field === "status") result = a.status.localeCompare(b.status);
-    if(field === "platform") result = a.platform.localeCompare(b.platform);
-    if(field === "budget") result = a.budget - b.budget;
-    if(field === "spent") result = a.spent - b.spent;
-    if(field === "conversions") result = a.conversions - b.conversions;
-
-    if(field === "ctr") {
-      const ctrA = a.clicks / a.impressions;
-      const ctrB = b.clicks / b.impressions;
-      result = ctrA - ctrB;
+    switch(field) {
+      case "name":
+        result = a.name.localeCompare(b.name);
+        break;
+      case "status":
+        result = a.status.localeCompare(b.status);
+        break;
+      case "platform":
+        result = a.platform.localeCompare(b.platform);
+        break;
+      case "budget":
+        result = a.budget - b.budget;
+        break;
+      case "spent":
+        result = a.spent - b.spent;
+        break;
+      case "conversions":
+        result = a.conversions - b.conversions;
+        break;
+      case "ctr":
+        const ctrA = a.impressions ? a.clicks / a.impressions : 0;
+        const ctrB = b.impressions ? b.clicks / b.impressions : 0;
+        result = ctrA - ctrB;
+        break;
     }
 
     return sortOrder === "asc" ? result : -result;
@@ -98,19 +112,54 @@ export function CampaignTable({ campaigns }: CampaignTableProps) {
       <table className="min-w-full border border-gray-200 dark:border-gray-700">
         <thead className="bg-gray-100 dark:bg-gray-800">
           <tr>
-            <th onClick={() => handleSort("name")} className="p-2 cursor-pointer">Name</th>
-            <th onClick={() => handleSort("status")} className="p-2 cursor-pointer">Status</th>
-            <th onClick={() => handleSort("platform")} className="p-2 cursor-pointer">Platform</th>
-            <th onClick={() => handleSort("budget")} className="p-2 cursor-pointer">Budget</th>
-            <th onClick={() => handleSort("spent")} className="p-2 cursor-pointer">Spent</th>
-            <th onClick={() => handleSort("conversions")} className="p-2 cursor-pointer">Conversions</th>
-            <th onClick={() => handleSort("ctr")} className="p-2 cursor-pointer">CTR</th>
+            <th
+              onClick={() => handleSort("name")}
+              className="p-2 cursor-pointer text-left"
+            >
+              Name
+            </th>
+            <th
+              onClick={() => handleSort("status")}
+              className="p-2 cursor-pointer text-left"
+            >
+              Status
+            </th>
+            <th
+              onClick={() => handleSort("platform")}
+              className="p-2 cursor-pointer text-left"
+            >
+              Platform
+            </th>
+            <th
+              onClick={() => handleSort("budget")}
+              className="p-2 cursor-pointer text-left"
+            >
+              Budget
+            </th>
+            <th
+              onClick={() => handleSort("spent")}
+              className="p-2 cursor-pointer text-left"
+            >
+              Spent
+            </th>
+            <th
+              onClick={() => handleSort("conversions")}
+              className="p-2 cursor-pointer text-left"
+            >
+              Conversions
+            </th>
+            <th
+              onClick={() => handleSort("ctr")}
+              className="p-2 cursor-pointer text-left"
+            >
+              CTR
+            </th>
           </tr>
         </thead>
 
         <tbody>
           {sortedCampaigns.map((c) => {
-            const ctr = (c.clicks / c.impressions) * 100;
+            const ctr = c.impressions ? (c.clicks / c.impressions) * 100 : 0;
 
             return (
               <tr
