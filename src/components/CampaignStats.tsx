@@ -26,7 +26,64 @@ interface CampaignStatsProps {
 //   - CTR = clicks / impressions per campaign, then average across campaigns
 // ---------------------------------------------------------------------------
 
+
+interface CampaignStatsProps {
+  campaigns: Campaign[];
+}
+
 export function CampaignStats({ campaigns }: CampaignStatsProps) {
-  console.log("campaigns",campaigns)
-  return <div>TODO: Implement CampaignStats</div>;
+  const totalCampaigns = campaigns.length;
+
+  const totalSpend = campaigns.reduce((sum, c) => sum + c.spent, 0);
+
+  const totalConversions = campaigns.reduce(
+    (sum, c) => sum + c.conversions,
+    0
+  );
+
+  const averageCTR =
+    campaigns.length === 0
+      ? 0
+      : campaigns.reduce((sum, c) => sum + c.clicks / c.impressions, 0) /
+        campaigns.length;
+
+  const currency = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="p-4 rounded-lg bg-white dark:bg-gray-800 shadow">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          Total Campaigns
+        </p>
+        <p className="text-2xl font-bold">{totalCampaigns}</p>
+      </div>
+
+      <div className="p-4 rounded-lg bg-white dark:bg-gray-800 shadow">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          Total Spend
+        </p>
+        <p className="text-2xl font-bold">{currency.format(totalSpend)}</p>
+      </div>
+
+      <div className="p-4 rounded-lg bg-white dark:bg-gray-800 shadow">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          Average CTR
+        </p>
+        <p className="text-2xl font-bold">
+          {(averageCTR * 100).toFixed(2)}%
+        </p>
+      </div>
+
+      <div className="p-4 rounded-lg bg-white dark:bg-gray-800 shadow">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          Conversions
+        </p>
+        <p className="text-2xl font-bold">{totalConversions}</p>
+      </div>
+
+    </div>
+  );
 }
