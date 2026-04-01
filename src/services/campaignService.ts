@@ -27,67 +27,67 @@ export async function fetchCampaigns(): Promise<CampaignsResponse> {
     const data: unknown = await res.json();
     return parseCampaigns(data)
   } catch(error: unknown) {
-    // // Mock fallback if API is not available
-    // const mockData = {
-    //   campaigns: [
-    //     {
-    //       id: 'camp-001',
-    //       name: 'Alpha Campaign',
-    //       status: 'completed',
-    //       platform: 'instagram',
-    //       budget: 15000,
-    //       spent: 15000,
-    //       impressions: 180000,
-    //       clicks: 9000,
-    //       conversions: 500,
-    //       startDate: '2026-01-01',
-    //       endDate: '2026-02-28',
-    //     },
-    //     {
-    //       id: 'camp-002',
-    //       name: 'Campaign A',
-    //       status: 'active',
-    //       platform: 'google',
-    //       budget: 10000,
-    //       spent: 5000,
-    //       impressions: 100000,
-    //       clicks: 5000,
-    //       conversions: 250,
-    //       startDate: '2026-03-01',
-    //       endDate: '2026-03-31',
-    //     },
-    //     {
-    //       id: 'camp-003',
-    //       name: 'Campaign B',
-    //       status: 'paused',
-    //       platform: 'facebook',
-    //       budget: 20000,
-    //       spent: 15000,
-    //       impressions: 200000,
-    //       clicks: 8000,
-    //       conversions: 400,
-    //       startDate: '2026-02-01',
-    //       endDate: '2026-03-15',
-    //     },
-    //     {
-    //       id: 'camp-004',
-    //       name: 'Campaign C',
-    //       status: 'completed',
-    //       platform: 'instagram',
-    //       budget: 15000,
-    //       spent: 15000,
-    //       impressions: 180000,
-    //       clicks: 9000,
-    //       conversions: 500,
-    //       startDate: '2026-01-01',
-    //       endDate: '2026-02-28',
-    //     }
-    //   ],
-    //   total: 4,
-    //   page: 1,
-    //   pageSize: 10,
-    // };
-    // return parseCampaigns(mockData);
-    throw error;
+    // Mock fallback if API is not available
+    const mockData = {
+      campaigns: [
+        {
+          id: 'camp-001',
+          name: 'Alpha Campaign',
+          status: 'completed',
+          platform: 'instagram',
+          budget: 15000,
+          spent: 15000,
+          impressions: 180000,
+          clicks: 9000,
+          conversions: 500,
+          startDate: '2026-01-01',
+          endDate: '2026-02-28',
+        },
+        {
+          id: 'camp-002',
+          name: 'Campaign A',
+          status: 'active',
+          platform: 'google',
+          budget: 10000,
+          spent: 5000,
+          impressions: 100000,
+          clicks: 5000,
+          conversions: 250,
+          startDate: '2026-03-01',
+          endDate: '2026-03-31',
+        },
+        {
+          id: 'camp-003',
+          name: 'Campaign B',
+          status: 'paused',
+          platform: 'facebook',
+          budget: 20000,
+          spent: 15000,
+          impressions: 200000,
+          clicks: 8000,
+          conversions: 400,
+          startDate: '2026-02-01',
+          endDate: '2026-03-15',
+        },
+        {
+          id: 'camp-004',
+          name: 'Campaign C',
+          status: 'completed',
+          platform: 'instagram',
+          budget: 15000,
+          spent: 15000,
+          impressions: 180000,
+          clicks: 9000,
+          conversions: 500,
+          startDate: '2026-01-01',
+          endDate: '2026-02-28',
+        }
+      ],
+      total: 4,
+      page: 1,
+      pageSize: 10,
+    };
+    return parseCampaigns(mockData);
+    // throw error;
   }
 }

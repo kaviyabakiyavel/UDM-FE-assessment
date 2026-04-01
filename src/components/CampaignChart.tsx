@@ -31,8 +31,8 @@ export function CampaignChart({ campaigns }: CampaignChartProps) {
   // Use mock data
   const series = [{ name: 'Spend', data: [5000, 18000, 20000] }];
   const options = { xaxis: { categories: ['Campaign A', 'Campaign B', 'Campaign C'] } };
-  return <div>
+  return (<div>
     <h1>Campaign Spend Overview</h1>
     <Chart type="bar" series={series} options={options} height={300} data-testid="apex-chart" />
-  </div>;
+  </div>);
 }

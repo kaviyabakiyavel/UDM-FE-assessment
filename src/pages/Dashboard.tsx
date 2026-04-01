@@ -1,25 +1,16 @@
 // This page integrates your completed components.
 // Uncomment and wire up as you complete each task.
 
-import { useState, useEffect } from 'react';
-import { fetchCampaigns } from '../services/campaignService';
-// import { CampaignStats } from '../components/CampaignStats';
+import { CampaignStats } from '../components/CampaignStats';
 import { CampaignTable } from '../components/CampaignTable';
-// import { CampaignChart } from '../components/CampaignChart';
-import type { Campaign } from '../schemas/campaign';
+import { CampaignChart } from '../components/CampaignChart';
+import { useCampaigns } from '../hooks/useCampaigns';
 
 export function Dashboard() {
-  const [campaignData, setData] = useState<Campaign[]>([])
+  const {data , loading,error} = useCampaigns()
 
-  useEffect(() => {
-    const CampaignsData = async () => {
-      const data = await fetchCampaigns()
-      setData(data.campaigns)
-    }
-    CampaignsData()
-  }, [])
-
-  console.log("campaignData", campaignData)
+  if (loading) return <p>Loading campaigns...</p>;
+  if (error) return <p>{error}</p>;
   
   return (
     <div className="space-y-8">
@@ -32,7 +23,9 @@ export function Dashboard() {
         and see <code className="rounded bg-gray-200 px-1.5 py-0.5 text-sm dark:bg-gray-700">README.md</code> for
         instructions.
       </p>
-      <CampaignTable campaigns={campaignData}/>
+       <CampaignTable campaigns={data} />
+      <CampaignStats campaigns={data} />
+      <CampaignChart campaigns={data} />
     </div>
   );
 }
